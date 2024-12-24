@@ -14,9 +14,12 @@ export const POST = async (request: NextRequest) => {
     const user = await User.findOne({
       email,
     });
-    if (user)
-      NextResponse.json({ error: "User doesnot exists" }, { status: 400 });
-
+    if (!user) {
+      return NextResponse.json(
+        { error: "User doesnot exists" },
+        { status: 400 },
+      );
+    }
     console.log(user);
 
     const validPassword = await bcryptjs.compare(password, user.password); //string and hash

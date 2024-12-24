@@ -6,7 +6,6 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
     //TODO cofigure mail for usage
     const hashedToken = await bcryptjs.hash(userId.toString(), 10);
     // special characters might cause encodeing like space 20% so prevent using special characters
- 
 
     if (emailType === "VERIFY") {
       await User.findByIdAndUpdate(userId, {
@@ -32,7 +31,7 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
     });
 
     const mailOptions = {
-      from: "hitesh@gmail.com",
+      from: "samir@gmail.com",
       to: email,
       subject:
         emailType === "VERIFY" ? "Verify your email" : "Reset your password",
@@ -73,5 +72,4 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
   } catch (error: any) {
     throw new Error(error.message);
   }
-                
 };
